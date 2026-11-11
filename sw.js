@@ -1,5 +1,23 @@
-const CACHE = 'fixitup-v1';
-const ASSETS = ['./','./index.html','./Petes-Fix-It-Up-Shop.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-180.png'];
+const CACHE = 'fixitup-v2';
+const ASSETS = [
+  './',
+  './index.html',
+  './Petes-Fix-It-Up-Shop.html',
+  './manifest.webmanifest',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/icon-180.png',
+  './src/shop-logic.mjs',
+  './src/engine.mjs',
+  './src/letters.mjs',
+  './src/intake.mjs',
+  './src/ocr.mjs',
+  './vendor/tesseract/tesseract.esm.min.js',
+  './vendor/tesseract/worker.min.js',
+  './vendor/tesseract/tesseract-core-simd-lstm.wasm.js',
+  './vendor/tesseract/tesseract-core-lstm.wasm.js',
+  './vendor/tesseract/lang/eng.traineddata.gz',
+];
 self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', e => {
